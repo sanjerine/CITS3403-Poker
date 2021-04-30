@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+  
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="poker.css">
+    <style>
+        #opening_window {
+          display:flex;
+          flex-direction:column;
+          height:87vh;
+          align-items:center;
+        }
+        #poker_text {
+          display:flex;
+          font-size:150px;
+        }
+        #cards {
+          display:flex;
+          flex-direction:row;
+          width:100%;
+          justify-content:space-around;
+        }
+        /* flip card code taken from  w3 is this actually allowed lol */
+        .flip-card {
+          background-color: transparent;
+          width: 150px;
+          height: 200px;
+          perspective: 1000px;
+        }
+
+        .flip-card-inner {
+          position: relative;
+          width: 100%;
+          height: 100%;
+          text-align: center;
+          transition: transform 0.8s;
+          transform-style: preserve-3d;
+        }
+
+        /* Do an horizontal flip when you move the mouse over the flip box container */
+        .flip-card:hover .flip-card-inner {
+          transform: rotateY(180deg);
+        }
+
+        /* Position the front and back side */
+        .flip-card-front, .flip-card-back {
+          position: absolute;
+          width: 100%;
+          height: 100%;
+          -webkit-backface-visibility: hidden; /* Safari */
+          backface-visibility: hidden;
+        }
+
+        /* Style the back side */
+        .flip-card-back {
+          transform: rotateY(180deg);
+        }
+    </style> 
+</head>
+<body>
+  <div class="container"> 
+    <nav class="navbar navbar-expand-sm k navbar-dark">
+      <a class="navbar-brand" href="#">
+        <img src="https://i.ibb.co/YpxVHWH/image.png" alt="logo" style="width:40px;">
+      </a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <!-- Links -->  
+      <div class="collapse navbar-collapse" id="collapsibleNavbar">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link" href="#">Hands</a>
+        </li> 
+        <li class="nav-item">
+          <a class="nav-link" href="#">Rules</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Tutorial</a>
+        </li>
+        </li>
+      </ul>
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="#">Log in</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Register</a>
+      </ul>
+      </div>
+    </nav>    
+    <div id="opening_window">
+      <div id="poker_text">Poker.</div>
+      <footer class="myfooter">Incman7 was here.</footer>
+      <div id="cards">
+        <div class="flip-card">
+          <div class="flip-card-inner">
+            <div class="flip-card-front">
+              <img src="https://i.ibb.co/W2Mx8GH/hands.png" alt="Avatar" style="width:150px">
+            </div>
+            <div class="flip-card-back">
+              <h1>Hands</h1>
+              <p>A helpful resource for all poker hands.</p>
+            </div>
+          </div>
+        </div>
+        <div class="flip-card">
+          <div class="flip-card-inner">
+            <div class="flip-card-front">
+              <img src="https://i.ibb.co/vVhmzbQ/rules.png" alt="Avatar" style="width:150px">
+            </div>
+            <div class="flip-card-back">
+              <h1>Rules</h1>
+              <p>A helpful resource for all poker rules</p>
+            </div>
+          </div>
+        </div>
+        <div class="flip-card">
+          <div class="flip-card-inner">
+            <div class="flip-card-front">
+              <img src="https://i.ibb.co/XJRjgxV/play.png" alt="Avatar" style="width:150px">
+            </div>
+            <div class="flip-card-back">
+              <h1>Tutorial</h1>
+              <p>A helpful resource for learning all of this together!</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+</body>
+<script>
+
+</script> 
+</html>

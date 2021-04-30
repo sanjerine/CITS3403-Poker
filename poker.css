@@ -1,0 +1,10 @@
+body {
+    background-color:#9F6BA0; 
+    color:#F5CCE8;
+  }
+.myfooter {
+    color: rgba(255, 255, 255, .5);
+    position:absolute;
+    bottom: 0;
+    padding-bottom:1%;
+}
