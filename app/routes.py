@@ -15,9 +15,9 @@ from app.forms import #all the classes of registration whatever
 
 @app.route('/')
 #all the routes that we want to include underneath here
-@app.route('/home')
+@app.route('/index')
 def home():
-    return render_template('home.html', title = 'Home') 
+    return render_template('index.html', title = 'Home') 
 
 @app.route('learn')
 def learn():
