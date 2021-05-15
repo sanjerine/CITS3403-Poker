@@ -31,7 +31,17 @@ class Question (db.Model):
     mark = db.Column(db.Integer, index = True, default = "1")
     answers = db.relationship('Answer', backref= 'question', lazy = True)
     
-    #insert functions here
+    def __repr__(self):
+        return 'Question {}: '.format(self.id) + '{}'.format(self.questionbody)
+    
+    def get_randomised_answers(self):
+        answers = Answer.query.filter_by(questionid = self.id).all()
+        random.shuffle(answers)
+        return answers
+    
+    def get_correct_answer(self):
+        return Answer.query.filter_by(questionid = self.id, answerid = 1).first()
+    
     
 class Answer(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -39,8 +49,16 @@ class Answer(db.Model):
     questionid = db.Column(db.Integer, db.ForeignKey('question.id'))
     answerid = db.Column(db.Boolean, default= False, nullable = False)
     
+    def __repr__(self):
+        return 'Answer: {}: '.format(self.option_body)
     
-class Quiz(db.Model):
+    def check_correct(self):
+        return self.answerid 
+    
+class Results(db.Model):
+    id = db.Column(db.Integer, primary_key = True)
+    userid = db.Column(db.Integer, db.ForeignKey('user.id'))
+    result = db.Column(db.Integer)
     
 
 #create database using mixin from flask_login or otherwise
