@@ -15,3 +15,13 @@ class LoginForm(FlaskForm):
     remember_me=BooleanField('Remember Me')
     submit=SubmitField('Sign In')
     
+    def validate_username(self, username):
+        user=User.query.filter_by(username=username.data).first()
+        if user is not None:
+            raise ValidationError('Username has already been taken, please choose another')
+            
+    def validate_email(self, email):
+        user=User.query.filter_by(email=email.data).first()
+        if user is not None:
+            raise ValidationError('Email has already been used, please use another')
+    
