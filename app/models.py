@@ -25,7 +25,23 @@ class Feedback (db.Model):
     feedback = db.Column(db.Text, index=True)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     
-class 
+class Question (db.Model):
+    id = db.Column(db.Integer, primary_key = True)
+    questionbody = db.Column(db.Text, index=True)
+    mark = db.Column(db.Integer, index = True, default = "1")
+    answers = db.relationship('Answer', backref= 'question', lazy = True)
+    
+    #insert functions here
+    
+class Answer(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    answerbody = db.Column(db.Text, index=True)
+    questionid = db.Column(db.Integer, db.ForeignKey('question.id'))
+    answerid = db.Column(db.Boolean, default= False, nullable = False)
+    
+    
+class Quiz(db.Model):
+    
 
 #create database using mixin from flask_login or otherwise
 #one for users, one for the poker hands (4 suits, 13 cards), one for outcome? dunno
