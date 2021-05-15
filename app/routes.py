@@ -2,6 +2,7 @@ from flask import Flask, render_template
 from app import app,db
 from flask_login import (username...etc)
 from app.models import (....)
+from app.forms import #all the classes of registration whatever
 #flask sqlalchemy import maybe
 #any forms we wanna import
 
