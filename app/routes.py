@@ -1,11 +1,12 @@
 
   
-from flask import Flask, render_template, url_for, redirect, flash, request
+from flask import Flask, session, render_template, url_for, redirect, flash, request
 from app import app,db
 from flask_login import current_user, login_user, logout_user, login_required
 from app.models import (....)
 from app.forms import #all the classes of registration whatever
 from werkzeug.urls import url_parse
+from datetime import timedelta
 #flask sqlalchemy import maybe
 #any forms we wanna import
 
@@ -13,18 +14,24 @@ from werkzeug.urls import url_parse
 
 @app.before_request
 # what we want before request . Timeout , validate etc
+@app.before_request
+def before_request():
+  session.permanent = True
+  app.permanent_session_lifetime = timedelta(minutes = 5)
+  session.modified = True
 
 @app.route('/')
 #all the routes that we want to include underneath here
 @app.route('/index')
-def home():
+def index():
+  if not current_user.is_authenticated:
     return render_template('index.html', title = 'Home') 
 
 @app.route('learn')
 def learn():
     return render_template('learn.html', title = 'Learn') 
 
-@app.route('/login')
+@app.route('/login', methods = ['GET', 'POST'])
 def login():
     if current_user.is_authenticated:
         return redirect(url_for('index'))
@@ -38,6 +45,12 @@ def login():
         return redirect(url_for('index'))
     return render_template('login.html', title='Sign In', form=form)
 
+@app.rout('/logout')
+def logout():
+  logout_user()
+  return redirect(url_for('general'))
+  
+
 @app.route('/quiz')
 def quiz():
     return render_template('quiz.html', title = 'Quiz') 
@@ -50,12 +63,14 @@ def feedback():
 def stats():
     return render_template('stats.html', title = 'Statistics') 
 
-@app.route('/logout')
-def logout():
-    return redirect(url_for('index'))
     
 @app.route('/register')
 def register():
-    return render_template('register.html', title = 'register') 
+  if current_user.is_authenticated:
+    return redirect(url_for('general'))
+  form = (....)
+  if form.validate_on_submit():
+    (....)
+  return render_template('register.html', title = 'Register', form=form) 
 
 
