@@ -2,6 +2,7 @@
 from app import db, login
 from flask_login import UserMixin
 from werkzeug.security import generate_password_hash, check_password_hash
+from flask_login import UserMixin
 
 class User(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -17,7 +18,14 @@ class User(UserMixin, db.Model):
 
     def get_id(self):
         return self.id
-
+    
+ 
+class Feedback (db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    feedback = db.Column(db.Text, index=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    
+class 
 
 #create database using mixin from flask_login or otherwise
 #one for users, one for the poker hands (4 suits, 13 cards), one for outcome? dunno
