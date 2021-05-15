@@ -2,9 +2,10 @@
   
 from flask import Flask, render_template
 from app import app,db
-from flask_login import (username...etc)
+from flask_login import current_user, login_user, logout_user, login_required
 from app.models import (....)
 from app.forms import #all the classes of registration whatever
+from werkzeug.urls import url_parse
 #flask sqlalchemy import maybe
 #any forms we wanna import
 
