@@ -4,7 +4,7 @@ from flask import Flask, session, render_template, url_for, redirect, flash, req
 from app import app,db
 from flask_login import current_user, login_user, logout_user, login_required
 from app.models import (....)
-from app.forms import #all the classes of registration whatever
+from app.forms import LoginForm, RegistrationForm
 from werkzeug.urls import url_parse
 from datetime import timedelta
 #flask sqlalchemy import maybe
@@ -68,9 +68,14 @@ def stats():
 def register():
   if current_user.is_authenticated:
     return redirect(url_for('general'))
-  form = (....)
+  form = RegistrationForm()
   if form.validate_on_submit():
-    (....)
+    user = User(username=form.username.data, email=form.data)
+    user.set_password(form.password.data)
+    db.session.add(user)
+    db.session.commit()
+    flash("You are now a registered!")
+    return redirect(url_for('login'))
   return render_template('register.html', title = 'Register', form=form) 
 
 
