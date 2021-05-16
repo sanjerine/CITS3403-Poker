@@ -3,7 +3,7 @@
 from flask import Flask, session, render_template, url_for, redirect, flash, request
 from app import app,db
 from flask_login import current_user, login_user, logout_user, login_required
-from app.models import (....)
+from app.models import User, Question, Answer, Feedback, Results
 from app.forms import LoginForm, RegistrationForm
 from werkzeug.urls import url_parse
 from datetime import timedelta
@@ -55,8 +55,19 @@ def logout():
 def quiz():
     return render_template('quiz.html', title = 'Quiz') 
 
-@app.route('/feedback')
+@app.route('/feedback', methods = ['GET', 'POST'])
+@login_required
 def feedback():
+  if request.method == "POST":
+    feedbackrequest = request.form["feedback']
+    if not bool(Feedback.query.filter_by(user_id = current_user.id).first()):
+      feedback = Feedback(feedbackuser = current_user)
+      db.session.add(feedback)
+      db.session.commit()
+                                   
+    current_user.feedback.filter_by(user_id = current_user.id).first().feedbackmsg = feedbackrequest  #note maked feedback data base feedback into feedbackmsg
+    db.session.commit()
+                                  
     return render_template('feedback.html', title = 'Feedback') 
 
 @app.route('/stats')
