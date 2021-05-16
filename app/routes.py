@@ -53,7 +53,7 @@ def logout():
 
   
 
-@app.route('/quiz', methods = ['GET, 'POST'])
+@app.route('/quiz', methods = ['GET', 'POST'])
 @login_required
 def quiz():
 
