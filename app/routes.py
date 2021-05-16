@@ -7,6 +7,7 @@ from app.models import User, Question, Answer, Feedback, Results
 from app.forms import LoginForm, RegistrationForm
 from werkzeug.urls import url_parse
 from datetime import timedelta
+from sqlalchemy import func
 #flask sqlalchemy import maybe
 #any forms we wanna import
 
@@ -95,8 +96,20 @@ def feedback():
     return render_template('feedback.html', title = 'Feedback') 
 
 @app.route('/stats')
-def stats():
-    return render_template('stats.html', title = 'Statistics') 
+def stats(): 
+    
+                                   
+    result = ''
+    qsum = ''
+    percentage = ''                               
+                                   
+    if bool(Results.query.filter_by(userid = current_user.id).first()):
+        qsum = db.session.query(func.sum(Question.mark)).scalar()    #ummm dunno lol
+        result = current_user.results.result
+        percentage = int((result/qsum) *100)                           
+    
+                                   
+    return render_template('Statistics.html', title = 'Statistics', result = result, sum = qsum, percentage = percentage) 
 
     
 @app.route('/register')
