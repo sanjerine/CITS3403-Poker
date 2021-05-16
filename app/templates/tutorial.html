@@ -1,0 +1,240 @@
+{% extends "base.html" %}
+
+{% block title %}Tutorial{% endblock%}
+{% block script %}
+<script>
+    var suits = ["c","s","h","d"];
+    var hands = ["Royal Flush","Straight Flush","Four of a Kind","Full House", "Flush","Straight","Three of a Kind","Two Pair","Pair","High Card"];
+    var hand = "Pair"
+    function genString(num,suit) {
+        str = "";
+        str += num;
+        str += suit;
+        str += ".png";
+        return str;
+    }
+    function genRandCard() {
+        var suit = suits[Math.floor(Math.random() * suits.length)];
+        var card = Math.floor(Math.random() * 13) + 2;
+        var arr = [NaN,card,suit];
+        arr[0] = genString(card,suit);
+        return arr;
+    }
+    function genSuits(num) {
+        used_suits = [];
+        final_suits = [];
+        for (i = 0; i < num; i++) {
+            var a = Math.floor(Math.random() * 4);
+            while (used_suits.includes(a)) {
+                a = Math.floor(Math.random() * 4);
+            }
+            final_suits.push(suits[a]);
+            used_suits.push(a);
+        }
+        return final_suits;
+    }
+    function genNums(num) {
+        used_nums = [];
+        final_nums = [];
+        for (i = 0; i < num; i++) {
+            var a = Math.floor(Math.random() * 13) + 2;
+            while (used_nums.includes(a)) {
+                a = Math.floor(Math.random() * 13) + 2;
+            }
+            final_nums.push(a);
+            used_nums.push(a);
+        }
+        var sorted_nums = Array.from(final_nums);
+        sorted_nums.sort(function(a, b){return b-a});
+        if (sorted_nums[0]-sorted_nums[num-1] == (num-1)) {
+            final_nums = genNums(num);
+        }
+        return final_nums;
+    }
+    function genHand(hand) {
+        var cards = ["","","","",""];
+        if (hand == 0) {
+            var suit = suits[Math.floor(Math.random() * 4)];
+            var card = 14;
+            for (i = 0; i < cards.length; i++) {
+                cards[i] = genString(card,suit);
+                card -= 1;
+            }
+        }
+        if (hand == 1) {
+            var suit = suits[Math.floor(Math.random() * suits.length)];
+            var card = Math.floor(Math.random() * 9) + 6;
+            for (i = 0; i < cards.length; i++) {
+                cards[i] = genString(card,suit);  
+                card -= 1;  
+            }
+    }
+        if (hand == 2) {
+                var card = Math.floor(Math.random() * 13) + 2;
+                for (i = 0; i < 4; i++) {
+                    cards[i] = genString(card,suits[i])    
+                }
+                var card2 = genRandCard();
+                while (card2[1] == card) {
+                    card2 = genRandCard();
+                }
+                cards[4] = card2[0];
+        } 
+        if (hand == 3) {
+            var card = Math.floor(Math.random() * 13) + 2;
+            var suits3 = genSuits(3);
+            var suits2 = genSuits(2);
+            for (i = 0; i < 3; i++) {
+                cards[i] = genString(card,suits3[i])
+            }
+            var card2 = Math.floor(Math.random() * 13) + 2;
+            while (card2 == card) {
+                card2 = Math.floor(Math.random() * 13) + 2;
+            }
+            for (i = 0; i < 2; i++) {
+                cards[i+3] = genString(card2,suits2[i])
+            }
+        }
+        if (hand == 4) {
+            var suit = suits[Math.floor(Math.random() * 4)];
+            var nums = genNums(5);
+            for (i = 0; i < 5; i++) {
+                cards[i] = genString(nums[i],suit)
+            }
+        }
+        if (hand == 5) {
+            var card = Math.floor(Math.random() * 9) + 6;
+            for (i = 0; i < cards.length; i++) {
+                var suit = suits[Math.floor(Math.random() * suits.length)];
+                cards[i] = genString(card,suit);  
+                card -= 1;  
+            }
+        }
+        if (hand == 6) {
+            var suits3 = genSuits(3);
+            var card = Math.floor(Math.random() * 13) + 2;
+            for (i = 0; i < 3; i++) {
+                cards[i] = genString(card,suits3[i]);
+            }
+            var randCard1 = genRandCard();
+            var randCard2 = genRandCard();
+            while (randCard1 == randCard2 || randCard1[1] == card || randCard2[1] == card) {
+                randCard1 = genRandCard();
+                randCard2 = genRandCard();
+            }
+            cards[3] = randCard1[0];
+            cards[4] = randCard2[0];
+        }
+        if (hand == 7) {
+            var suits2_1 = genSuits(2);
+            var suits2_2 = genSuits(2);
+            var nums = genNums(2);
+            cards[0] = genString(nums[0],suits2_1[0]);
+            cards[1] = genString(nums[0],suits2_1[1]);
+            cards[2] = genString(nums[1],suits2_2[0]);
+            cards[3] = genString(nums[1],suits2_2[1]);
+            var randCard = genRandCard();
+            while (nums.includes(randCard[1])) {
+                randCard = genRandCard();
+            }
+            cards[4] = randCard[0];
+        }
+        if (hand == 8) {
+            var nums = genNums(4);
+            var suits2 = genSuits(2);
+            for (i = 0; i < 2; i++) {
+                cards[i] = genString(nums[0],suits2[i]);
+            }
+            for (i = 2; i < 5; i++) {
+                var suit = suits[Math.floor(Math.random() * 4)];
+                cards[i] = genString(nums[i-1],suit);
+            }
+        }
+        if (hand == 9) {
+            var nums = genNums(5);
+            var suits5 = genSuits(4);
+            for (i = 0; i < 4; i++) {
+                cards[i] = genString(nums[i],suits5[i]);
+            }
+            cards[4] = genString(nums[4],suits[Math.floor(Math.random() * 4)])
+        }
+        if (hand == 10) {
+            return genHand(Math.floor(Math.random() * 10));
+        }
+        // fisher - yates shuffle to randomize order
+        var curr = 5, temp, rand;
+        while (curr !== 0) {
+            rand = Math.floor(Math.random() * curr);
+            curr--;
+            temp = cards[curr];
+            cards[curr] = cards[rand];
+            cards[rand] = temp;
+        }
+        return cards;
+    }
+    function replaceCards(hand){
+        var cards = document.getElementsByClassName("cardimg");
+        for (i = 0; i < cards.length; i++) {
+            str = "/static/deck/";
+            str += hand[i];
+            cards[i].setAttribute("src",str);
+        }
+    }
+    function checkAnswer() {
+        if (document.getElementById("inp").value.toLowerCase() == hand.toLowerCase()) {
+            document.getElementById("inp").value = "";
+            var right = Number(document.getElementById("right").innerHTML);
+            document.getElementById("right").innerHTML = right + 1;
+            var num = Math.floor(Math.random() * 10);
+            hand = hands[num];
+            replaceCards(genHand(num));
+        }
+        else {
+            var wrong = Number(document.getElementById("wrong").innerHTML);
+            document.getElementById("wrong").innerHTML = wrong + 1;
+        }
+    }
+    var inp = document.getElementById("inp");
+    inp.addEventListener("keyup", function(event) {
+        if (event.keyCode === 13) {
+            event.preventDefault();
+            document.getElementById("butt1").click();
+            }
+        }
+    );
+</script> 
+{% endblock %}
+{% block head %}
+    {{ super() }}
+    <style>
+        img { 
+            width:100px; /*styling the cards*/
+        }
+    </style>
+{% endblock %}
+
+{% block content %}
+    <div style="display:flex;flex-direction:row;">
+        <img class="cardimg" src="/static/deck/14c.png">
+        <img class="cardimg" src="/static/deck/13c.png">
+        <img class="cardimg" src="/static/deck/12d.png">
+        <img class="cardimg" src="/static/deck/6c.png">
+        <img class="cardimg" src="/static/deck/14c.png">
+        <input id="inp">
+        <button id="butt1" onclick="checkAnswer()">Hey! Press</button>
+        <div style="display:flex;flex-direction:column;">
+            <div>Right: <div id="right">0</div></div>
+            <div>Wrong: <div id="wrong">0</div></div>
+        </div>
+    <script>
+        var inp = document.getElementById("inp");
+        inp.addEventListener("keyup", function(event) {
+            if (event.keyCode === 13) {
+                event.preventDefault();
+                document.getElementById("butt1").click();
+                }
+            }
+        );
+    </script>
+    </div>
+{% endblock %}
