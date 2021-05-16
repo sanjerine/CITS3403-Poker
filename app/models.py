@@ -25,7 +25,7 @@ class User(UserMixin, db.Model):
  
 class Feedback (db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    feedback = db.Column(db.Text, index=True)
+    feedbackmsg = db.Column(db.Text, index=True)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     
 class Question (db.Model):
