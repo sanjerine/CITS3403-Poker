@@ -49,14 +49,35 @@ def login():
 def logout():
   logout_user()
   return redirect(url_for('index'))
+
   
 
-@app.route('/quiz')
+@app.route('/quiz', methods['GET, 'POST'])
 @login_required
 def quiz():
-  
-  
-    return render_template('quiz.html', title = 'Quiz') 
+
+    questions = Question.query.filter_by(question.id = id) #HOW TO JUST GET ALL QUESTION maybe function in data base
+    
+    result = 0
+                            
+    if request.method =="POST":
+        
+        for question in questions:
+            qid = str(question.id)
+            qbody = request.form[qid]
+            if Answers.query.filter_by(answerbody = qbody).first().answerid:
+                result += 1
+                            
+        if not bool(Results.query.filter_by(userid = current_user.id).first()):
+            results = Results(userres = current_user)
+            db.session.add(results)
+            db.session.commit()
+        cureent_user.results.result = result
+        db.session.commit()                   
+                            
+        return redirect(url_for('index'))                 
+                            
+    return render_template('quiz.html', title = 'Quiz', questions = questions) 
 
 @app.route('/feedback', methods = ['GET', 'POST'])
 @login_required
