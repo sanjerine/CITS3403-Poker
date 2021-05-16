@@ -40,6 +40,12 @@ class Question (db.Model):
     def __repr__(self):
         return 'Question {}: '.format(self.id) + '{}'.format(self.questionbody)
     
+    def get_question(self):
+        questions = []
+        for question in Question.questionbody:
+            questions.append(question)
+            
+    
     def get_randomised_answers(self):
         answers = Answer.query.filter_by(questionid = self.id).all()
         random.shuffle(answers)
