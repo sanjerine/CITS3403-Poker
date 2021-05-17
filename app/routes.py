@@ -117,7 +117,9 @@ def feedback():
 
 @app.route('/stats')
 def stats(): 
-    
+    tutorial_results=[]
+    for result in db.session.query(Result.num_correct).join(User).filter(User.id==(current_user.get_id())):
+        tutorial_results.append(result[0])
                                    
     result = ''
     qsum = ''
