@@ -9,17 +9,18 @@
 
 {% block content %}
     <div style="display:flex;align-items:flex-start;flex-direction:column;">
-        {% for question in questions %}
-        <div class = "question-body">
-            <h1 class="question">{{question.questionbody}}</h1>
-            <div class = "answers">
-                {%for answer in question.answers%}
-                    <input type = "radio" name = "{{question.id}}" id = {{answer.id}}" value = "{{answer.answerbody}}" required>
-                    <label for="{{answer.id}}> {{answer.answerbody}} </label>
-                {% endfor %}
+        <form action="", method="post">
+            {% for question in questions %}
+            <div class = "question-body">
+                <h1 class="question">{{question.questionbody}}</h1>
+                <div class = "answers">
+                    {%for answer in question.answers%}
+                        <input type = "radio" name = "{{question.id}}" id = {{answer.id}}" value = "{{answer.answerbody}}" required>
+                        <label for="{{answer.id}}> {{answer.answerbody}} </label>
+                    {% endfor %}
+                </div>
             </div>
-        </div>
-        {% endfor %}
+            {% endfor %}
           
         
         <div style="display:flex;flex-direction:column;">
