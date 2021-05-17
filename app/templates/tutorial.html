@@ -5,7 +5,7 @@
 <script>
     var suits = ["c","s","h","d"];
     var hands = ["Royal Flush","Straight Flush","Four of a Kind","Full House", "Flush","Straight","Three of a Kind","Two Pair","Pair","High Card"];
-    var hand = "Pair"
+    var hand = "Straight Flush"
     function genString(num,suit) {
         str = "";
         str += num;
@@ -180,12 +180,25 @@
             cards[i].setAttribute("src",str);
         }
     }
-    function checkAnswer() {
+    var gameState = false;
+    var progress = false;
+    function checkAnswer(ceiling) {
+        if (gameState == false) {return;}
         if (document.getElementById("inp").value.toLowerCase() == hand.toLowerCase()) {
+            var rightnum = document.getElementsByClassName("counter")[0].innerHTML;
+            if (rightnum > 3) {
+                document.getElementsByClassName("counter")[0].innerHTML = 0;
+                document.getElementsByClassName("counter")[1].innerHTML = 0;
+                document.getElementById("inp").value = "";
+                gameState = false;
+                progress = true;
+                continueGame();
+                return;
+            }
             document.getElementById("inp").value = "";
             var right = Number(document.getElementById("right").innerHTML);
             document.getElementById("right").innerHTML = right + 1;
-            var num = Math.floor(Math.random() * 10);
+            var num = Math.floor(Math.random() * ceiling);
             hand = hands[num];
             replaceCards(genHand(num));
         }
@@ -198,14 +211,6 @@
             document.getElementById("wrong").innerHTML = wrong + 1;
         }
     }
-    var inp = document.getElementById("inp");
-    inp.addEventListener("keyup", function(event) {
-        if (event.keyCode === 13) {
-            event.preventDefault();
-            document.getElementById("butt1").click();
-            }
-        }
-    );
 </script> 
 {% endblock %}
 {% block head %}
@@ -246,24 +251,134 @@
             <button id="continue"><b>Continue</b></button>
         </div>
         <div style="display:flex;flex-direction:column;justify-content:space-around;border-radius:15px;background-color:#B78FB7; width:550px; height: 400px; align-items:center">
-            <div style="display:none" id="cards">
-                <img class="cardimg" src="/static/deck/14c.png">
-                <img class="cardimg" src="/static/deck/13c.png">
-                <img class="cardimg" src="/static/deck/12d.png">
-                <img class="cardimg" src="/static/deck/6c.png">
-                <img class="cardimg" src="/static/deck/14c.png">    
+            <div id="cards">
+                <img class="cardimg" src="/static/deck/red_joker.png">
+                <img class="cardimg" src="/static/deck/red_joker.png">
+                <img class="cardimg" src="/static/deck/red_joker.png">
+                <img class="cardimg" src="/static/deck/red_joker.png">
+                <img class="cardimg" src="/static/deck/red_joker.png">    
+            </div>
+            <div id = "gametext">
+                <input id="inp" style="width:350px" placeholder="What hand could this be...?">
+                <button id="butt1" onclick="checkAnswer(current_ceiling)" style="width:150px">Check it!</button> 
+                <div style="margin:auto;margin-top:20px;width:250px;display:flex;flex-direction:row;text-align:center;justify-content:space-around;">
+                    <div>Right: <div class="counter" id="right">0</div></div>
+                    <div>Wrong: <div class="counter" id="wrong">0</div></div>
+                </div>
             </div>
         </div>
     </div>
 
     <script>
-        var inp = document.getElementById("inp");
-        inp.addEventListener("keyup", function(event) {
+        document.getElementById("inp").addEventListener("keyup", function(event) {
             if (event.keyCode === 13) {
                 event.preventDefault();
                 document.getElementById("butt1").click();
                 }
+            });
+        document.getElementById("continue").addEventListener("click",continueGame);           
+
+        var lines = [
+        "",
+        "Today we're going to learn how to identify each of the different poker hands.",
+        "Let's start with the highest hand - the Royal Flush.",
+        "The Royal Flush is comprised of the five highest cards of the same suit.",
+        "That is, the A, K, Q, J, and 10.",
+        "That wasn't so bad, was it? Now let's introduce another hand.",
+        "This is the Straight Flush - the second highest hand.",
+        "The Straight Flush is comprised of five cards in sequence of the same suit.",
+        "Think you've got it? Let's try out our first test. Get 5 right to progress!",
+        "Not bad! Let's add in two more hands, shall we?",
+        "This is the third highest hand, the Four of a Kind.",
+        "As you can imagine, it's made of four cards all of the same rank - and a straggler.",
+        "Got it? Now, this hand...",
+        "This is the Full House, the fourth highest hand.",
+        "It's made of three cards of the same rank, as well as a pair.",
+        "Let's try out our second test. Good luck!",
+        "Eager for more? Let's add two more hands into our mix.",
+        "This is the Flush - the fifth highest hand.",
+        "The flush is made up of any five cards of the same suit.",
+        "Got it? Let's move on.",
+        "This is the Straight. The sixth highest hand.",
+        "The straight is made up of any five cards in sequence - not from the same suit.",
+        "Seems simple enough, right? Let's try another quiz.",
+        "Well done! Not many more now. Let's move onto our seventh highest hand.",
+        "The Three of a Kind. This one is simply made up of three cards of the same rank.",
+        "What about this one you might ask? Well, this is the Two Pair.",
+        "The two pair is made up of... one pair. And another. It makes two pairs.",
+        "You know the drill.","Home stretch! Let's introduce our last two hands.",
+        "Clocking in at number 9 is the Pair. It's made up of... you can probably guess.",
+        "And at number 10 - our lowest hand - the High Card!",
+        "It's not really a hand per se. When you can't make any of the other hands, your highest card plays.",
+        "Alright, let's put it all together! See how many you can get right in a minute - and check your score on our scoreboard later!"
+        ]; 
+        var line = 1;
+        var current_ceiling = 2;  
+        function continueGame() {
+            var rightnum = document.getElementsByClassName("counter")[0].innerHTML;
+            if (gameState == true) {
+                return;         
+            } 
+            if (line == 2) {
+                replaceCards(["14c.png","13c.png","12c.png","11c.png","10c.png"]);
             }
-        );
+            if (line == 5) {
+                replaceCards(["12h.png","11h.png","10h.png","9h.png","8h.png"]);
+            }
+            if (line == 7) {
+                gameState = true;
+            }        
+            if (line == 9) {
+                replaceCards(["12h.png","12d.png","12c.png","12s.png","8h.png"]);
+            }  
+            if (line == 12) {
+                replaceCards(["10h.png","10s.png","10c.png","8s.png","8h.png"]);
+                hand = "Full House";
+            }  
+            if (line == 14) {
+                gameState = true;
+                current_ceiling = 4;
+            }  
+            if (line == 16) {
+                replaceCards(["11h.png","14h.png","10h.png","3h.png","8h.png"]);
+            }  
+            if (line == 19) {
+                replaceCards(["9h.png","8s.png","7d.png","6h.png","5c.png"]);
+                hand = "Straight";
+            }
+            if (line == 21) {
+                gameState = true;
+                current_ceiling = 6;
+            }
+            if (line == 23) {
+                replaceCards(["11h.png","11c.png","11h.png","3s.png","8d.png"]);
+            }  
+            if (line == 25) {
+                replaceCards(["9h.png","9s.png","7d.png","7h.png","5c.png"]);
+                hand = "Two Pair";
+            }
+            if (line == 26) {
+                gameState = true;
+                current_ceiling = 8;
+            }
+            if (line == 28) {
+                replaceCards(["11h.png","11c.png","13h.png","3s.png","8d.png"]);
+            }  
+            if (line == 30) {
+                replaceCards(["9h.png","4s.png","7d.png","11h.png","3c.png"]);
+                hand = "High Card";
+            }
+            if (line == 32) {
+                gameState = true;
+                current_ceiling = 10;
+            }
+            $("#boxtext").fadeOut(500);
+            setTimeout(function(){ 
+                $("#boxtext").html(lines[line]);
+                $("#boxtext").fadeIn(500);
+            }, 500);
+            line++;
+        
+        }
     </script>
 {% endblock %}
