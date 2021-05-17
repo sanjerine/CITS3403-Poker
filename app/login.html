@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% block title %}Log-In{% endblock%}
+{% block head %}
+  {{ super() }}
+  <style type="text/css">
+    #opening_window {
+        height:70vh;
+    }
+    #log_in_window {
+        display:flex;
+        background-color:#C880B7;
+        height:400px;
+        width:300px;
+        flex-direction:column;
+        align-items:center;
+        border-radius:25px;
+        justify-content:space-around;
+        font-family:"Helvetica Neue", Helvetica, Arial, sans-serif;
+    }
+  </style>
+{% endblock %}
+
+{% block content %}
+    <div id="log_in_window">
+        <div style="font-size:50px">Log In</div>
+        <div>
+            <div style="margin-bottom:5px;">Username</div>
+            <div style="margin-bottom:5px;"><input id="username_input"></div>
+            <div style="margin-bottom:5px;">Password</div>
+            <div style="margin-bottom:5px;"><input type="password" id="password_input"></div>
+            
+        </div>
+        <div><button>Submit</button></div>
+        <div>Forget password? Click <a href=#><b>here!</b></a></div>
+    </div>
+{% endblock %}

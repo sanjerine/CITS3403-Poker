@@ -1,0 +1,388 @@
+{% extends "base.html" %}
+
+{% block title %}Tutorial{% endblock%}
+{% block script %}
+<script>
+    var suits = ["c","s","h","d"];
+    var hands = ["Royal Flush","Straight Flush","Four of a Kind","Full House", "Flush","Straight","Three of a Kind","Two Pair","Pair","High Card"];
+    var hand = "Straight Flush"
+    function genString(num,suit) {
+        str = "";
+        str += num;
+        str += suit;
+        str += ".png";
+        return str;
+    }
+    function genRandCard() {
+        var suit = suits[Math.floor(Math.random() * suits.length)];
+        var card = Math.floor(Math.random() * 13) + 2;
+        var arr = [NaN,card,suit];
+        arr[0] = genString(card,suit);
+        return arr;
+    }
+    function genSuits(num) {
+        used_suits = [];
+        final_suits = [];
+        for (i = 0; i < num; i++) {
+            var a = Math.floor(Math.random() * 4);
+            while (used_suits.includes(a)) {
+                a = Math.floor(Math.random() * 4);
+            }
+            final_suits.push(suits[a]);
+            used_suits.push(a);
+        }
+        return final_suits;
+    }
+    function genNums(num) {
+        used_nums = [];
+        final_nums = [];
+        for (i = 0; i < num; i++) {
+            var a = Math.floor(Math.random() * 13) + 2;
+            while (used_nums.includes(a)) {
+                a = Math.floor(Math.random() * 13) + 2;
+            }
+            final_nums.push(a);
+            used_nums.push(a);
+        }
+        var sorted_nums = Array.from(final_nums);
+        sorted_nums.sort(function(a, b){return b-a});
+        if (sorted_nums[0]-sorted_nums[num-1] == (num-1)) {
+            final_nums = genNums(num);
+        }
+        return final_nums;
+    }
+    function genHand(hand) {
+        var cards = ["","","","",""];
+        if (hand == 0) {
+            var suit = suits[Math.floor(Math.random() * 4)];
+            var card = 14;
+            for (i = 0; i < cards.length; i++) {
+                cards[i] = genString(card,suit);
+                card -= 1;
+            }
+        }
+        if (hand == 1) {
+            var suit = suits[Math.floor(Math.random() * suits.length)];
+            var card = Math.floor(Math.random() * 8) + 6;
+            for (i = 0; i < cards.length; i++) {
+                cards[i] = genString(card,suit);  
+                card -= 1;  
+            }
+        }
+        if (hand == 2) {
+                var card = Math.floor(Math.random() * 13) + 2;
+                for (i = 0; i < 4; i++) {
+                    cards[i] = genString(card,suits[i])    
+                }
+                var card2 = genRandCard();
+                while (card2[1] == card) {
+                    card2 = genRandCard();
+                }
+                cards[4] = card2[0];
+        } 
+        if (hand == 3) {
+            var card = Math.floor(Math.random() * 13) + 2;
+            var suits3 = genSuits(3);
+            var suits2 = genSuits(2);
+            for (i = 0; i < 3; i++) {
+                cards[i] = genString(card,suits3[i])
+            }
+            var card2 = Math.floor(Math.random() * 13) + 2;
+            while (card2 == card) {
+                card2 = Math.floor(Math.random() * 13) + 2;
+            }
+            for (i = 0; i < 2; i++) {
+                cards[i+3] = genString(card2,suits2[i])
+            }
+        }
+        if (hand == 4) {
+            var suit = suits[Math.floor(Math.random() * 4)];
+            var nums = genNums(5);
+            for (i = 0; i < 5; i++) {
+                cards[i] = genString(nums[i],suit)
+            }
+        }
+        if (hand == 5) {
+            var card = Math.floor(Math.random() * 9) + 6;
+            for (i = 0; i < cards.length; i++) {
+                var suit = suits[Math.floor(Math.random() * suits.length)];
+                cards[i] = genString(card,suit);  
+                card -= 1;  
+            }
+        }
+        if (hand == 6) {
+            var suits3 = genSuits(3);
+            var card = Math.floor(Math.random() * 13) + 2;
+            for (i = 0; i < 3; i++) {
+                cards[i] = genString(card,suits3[i]);
+            }
+            var randCard1 = genRandCard();
+            var randCard2 = genRandCard();
+            while (randCard1 == randCard2 || randCard1[1] == card || randCard2[1] == card) {
+                randCard1 = genRandCard();
+                randCard2 = genRandCard();
+            }
+            cards[3] = randCard1[0];
+            cards[4] = randCard2[0];
+        }
+        if (hand == 7) {
+            var suits2_1 = genSuits(2);
+            var suits2_2 = genSuits(2);
+            var nums = genNums(2);
+            cards[0] = genString(nums[0],suits2_1[0]);
+            cards[1] = genString(nums[0],suits2_1[1]);
+            cards[2] = genString(nums[1],suits2_2[0]);
+            cards[3] = genString(nums[1],suits2_2[1]);
+            var randCard = genRandCard();
+            while (nums.includes(randCard[1])) {
+                randCard = genRandCard();
+            }
+            cards[4] = randCard[0];
+        }
+        if (hand == 8) {
+            var nums = genNums(4);
+            var suits2 = genSuits(2);
+            for (i = 0; i < 2; i++) {
+                cards[i] = genString(nums[0],suits2[i]);
+            }
+            for (i = 2; i < 5; i++) {
+                var suit = suits[Math.floor(Math.random() * 4)];
+                cards[i] = genString(nums[i-1],suit);
+            }
+        }
+        if (hand == 9) {
+            var nums = genNums(5);
+            var suits5 = genSuits(4);
+            for (i = 0; i < 4; i++) {
+                cards[i] = genString(nums[i],suits5[i]);
+            }
+            cards[4] = genString(nums[4],suits[Math.floor(Math.random() * 4)])
+        }
+        if (hand == 10) {
+            return genHand(Math.floor(Math.random() * 10));
+        }
+        // fisher - yates shuffle to randomize order
+        var curr = 5, temp, rand;
+        while (curr !== 0) {
+            rand = Math.floor(Math.random() * curr);
+            curr--;
+            temp = cards[curr];
+            cards[curr] = cards[rand];
+            cards[rand] = temp;
+        }
+        return cards;
+    }
+    function replaceCards(hand){
+        var cards = document.getElementsByClassName("cardimg");
+        for (i = 0; i < cards.length; i++) {
+            str = "/static/deck/";
+            str += hand[i];
+            cards[i].setAttribute("src",str);
+        }
+
+    }
+    var gameState = false;
+    var progress = false;
+    function checkAnswer(ceiling) {
+        if (gameState == false) {return;}
+        if (document.getElementById("inp").value.toLowerCase() == hand.toLowerCase()) {
+            var rightnum = document.getElementsByClassName("counter")[0].innerHTML;
+            if (rightnum > 3) {
+                document.getElementsByClassName("counter")[0].innerHTML = 0;
+                document.getElementsByClassName("counter")[1].innerHTML = 0;
+                document.getElementById("inp").value = "";
+                gameState = false;
+                progress = true;
+                continueGame();
+                return;
+            }
+            document.getElementById("inp").value = "";
+            var right = Number(document.getElementById("right").innerHTML);
+            document.getElementById("right").innerHTML = right + 1;
+            var num = Math.floor(Math.random() * ceiling);
+            hand = hands[num];
+            replaceCards(genHand(num));
+            console.log(num, hand);
+        }
+        else {
+            element = document.getElementById("inp");
+            element.className="right";
+            void element.offsetWidth;
+            element.className="wrong";
+            var wrong = Number(document.getElementById("wrong").innerHTML);
+            document.getElementById("wrong").innerHTML = wrong + 1;
+        }
+    }
+</script> 
+{% endblock %}
+{% block head %}
+    {{ super() }}
+    <style>
+        #opening_window {
+            height:80vh;
+            width:100%;
+          } 
+        #continue {
+            margin-top: auto;
+            background-color: rgba(0, 0, 255, 0.0);
+            border: none;
+            color:#F5CCE8;
+        }
+        img { 
+            width:100px; /*styling the cards*/
+        }
+        .wrong {
+        animation: shake 0.2s;
+        }   
+        @keyframes shake {
+        0% { transform: translate(1px, 1px) rotate(0deg); }
+        20% { transform: translate(-1px, -2px) rotate(-1deg); }
+        40% { transform: translate(-3px, 0px) rotate(1deg); }
+        60% { transform: translate(3px, 2px) rotate(0deg); }
+        80% { transform: translate(1px, -1px) rotate(1deg); }
+        100% { transform: translate(-1px, 2px) rotate(-1deg); }
+        }
+    </style>
+{% endblock %}
+
+{% block content %}
+    <progress style="color:#644064;width:500px;margin-bottom:30px;" id="lineprogress" value="" max="32"></progress>
+    <div style="display:flex;flex-direction:row;justify-content:space-between;width:725px;">
+        <div id = "welcome_text" style="display:flex;flex-direction:column;height:400px; width:150px; background-color:#644064;border-radius:15px;padding:15px;">
+            <p id="boxtext">Welcome to the world of Poker!</p>
+            <button id="continue"><b>Continue</b></button>
+        </div>
+        <div style="display:flex;flex-direction:column;justify-content:space-around;border-radius:15px;background-color:#B78FB7; width:550px; height: 400px; align-items:center">
+            <div id="cards">
+                <img class="cardimg" src="/static/deck/red_joker.png">
+                <img class="cardimg" src="/static/deck/red_joker.png">
+                <img class="cardimg" src="/static/deck/red_joker.png">
+                <img class="cardimg" src="/static/deck/red_joker.png">
+                <img class="cardimg" src="/static/deck/red_joker.png">    
+            </div>
+            <div id = "gametext">
+                <input id="inp" style="width:350px;" placeholder="What hand could this be...?">
+                <button id="butt1" onclick="checkAnswer(current_ceiling)" style="width:150px">Check it!</button> 
+                <div style="margin:auto;margin-top:20px;width:250px;display:flex;flex-direction:row;text-align:center;justify-content:space-around;">
+                    <div>Right: <div class="counter" id="right">0</div></div>
+                    <div>Wrong: <div class="counter" id="wrong">0</div></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById("inp").addEventListener("keyup", function(event) {
+            if (event.keyCode === 13) {
+                event.preventDefault();
+                document.getElementById("butt1").click();
+                }
+            });
+        document.getElementById("continue").addEventListener("click",continueGame);           
+
+        var lines = [
+        "",
+        "Today we're going to learn how to identify each of the different poker hands.",
+        "Today we're going to learn each poker hand. Let's start with the highest hand - the Royal Flush.",
+        "The Royal Flush is comprised of the five highest cards of the same suit.",
+        "That is, the A, K, Q, J, and 10.",
+        "That wasn't so bad, was it? Now let's introduce another hand.",
+        "This is the Straight Flush - the second highest hand.",
+        "The Straight Flush is comprised of five cards in sequence of the same suit.",
+        "Think you've got it? Let's try out our first test. Get 5 right to progress!",
+        "Not bad! Let's add in two more hands, shall we?",
+        "This is the third highest hand, the Four of a Kind.",
+        "As you can imagine, it's made of four cards all of the same rank - and a straggler.",
+        "Got it? Now, this hand...",
+        "This is the Full House, the fourth highest hand.",
+        "It's made of three cards of the same rank, as well as a pair.",
+        "Let's try out our second test. Good luck!",
+        "Eager for more? Let's add two more hands into our mix.",
+        "This is the Flush - the fifth highest hand.",
+        "The flush is made up of any five cards of the same suit.",
+        "Got it? Let's move on.",
+        "This is the Straight. The sixth highest hand.",
+        "The straight is made up of any five cards in sequence - not from the same suit.",
+        "Seems simple enough, right? Let's try another quiz.",
+        "Well done! Not many more now. Let's move onto our seventh highest hand.",
+        "The Three of a Kind. This one is simply made up of three cards of the same rank.",
+        "What about this one you might ask? Well, this is the Two Pair.",
+        "The two pair is made up of... one pair. And another. It makes two pairs.",
+        "You know the drill.","Home stretch! Let's introduce our last two hands.",
+        "Clocking in at number 9 is the Pair. It's made up of... you can probably guess.",
+        "And at number 10 - our lowest hand - the High Card!",
+        "It's not really a hand per se. When you can't make any of the other hands, your highest card plays.",
+        "Alright, let's put it all together! See how many you can get right in a minute - and check your score on our scoreboard later!"
+        ]; 
+        var line = 1;
+        var current_ceiling = 2;  
+        function continueGame() {
+            document.getElementById("lineprogress").setAttribute("value", line)
+            var rightnum = document.getElementsByClassName("counter")[0].innerHTML;
+            if (gameState == true) {
+                return;         
+            } 
+            if (line == 2) {
+                replaceCards(["14c.png","13c.png","12c.png","11c.png","10c.png"]);
+            }
+            if (line == 5) {
+                replaceCards(["12h.png","11h.png","10h.png","9h.png","8h.png"]);
+            }
+            if (line == 7) {
+                gameState = true;
+                document.getElementById("")
+            }        
+            if (line == 9) {
+                replaceCards(["12h.png","12d.png","12c.png","12s.png","8h.png"]);
+            }  
+            if (line == 12) {
+                replaceCards(["10h.png","10s.png","10c.png","8s.png","8h.png"]);
+                hand = "Full House";
+            }  
+            if (line == 14) {
+                gameState = true;
+                current_ceiling = 4;
+            }  
+            if (line == 16) {
+                replaceCards(["11h.png","14h.png","10h.png","3h.png","8h.png"]);
+            }  
+            if (line == 19) {
+                replaceCards(["9h.png","8s.png","7d.png","6h.png","5c.png"]);
+                hand = "Straight";
+            }
+            if (line == 21) {
+                gameState = true;
+                current_ceiling = 6;
+            }
+            if (line == 23) {
+                replaceCards(["11h.png","11c.png","11h.png","3s.png","8d.png"]);
+            }  
+            if (line == 25) {
+                replaceCards(["9h.png","9s.png","7d.png","7h.png","5c.png"]);
+                hand = "Two Pair";
+            }
+            if (line == 26) {
+                gameState = true;
+                current_ceiling = 8;
+            }
+            if (line == 28) {
+                replaceCards(["11h.png","11c.png","13h.png","3s.png","8d.png"]);
+            }  
+            if (line == 30) {
+                replaceCards(["9h.png","4s.png","7d.png","11h.png","3c.png"]);
+                hand = "High Card";
+            }
+            if (line == 32) {
+                gameState = true;
+                current_ceiling = 10;
+            }
+            $("#boxtext").fadeOut(500);
+            setTimeout(function(){ 
+                $("#boxtext").html(lines[line]);
+                $("#boxtext").fadeIn(500);
+            }, 500);
+            line++;
+        
+        }
+    </script>
+{% endblock %}

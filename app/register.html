@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% block title %}Register{% endblock%}
+{% block head %}
+  {{ super() }}
+  <style type="text/css">
+    #opening_window {
+        height:80vh;
+    }
+    #register_window {
+        display:flex;
+        background-color:#C880B7;
+        height:450px;
+        width:300px;
+        flex-direction:column;
+        align-items:center;
+        border-radius:25px;
+        justify-content:space-around;
+        font-family:"Helvetica Neue", Helvetica, Arial, sans-serif;
+    }
+  </style>
+{% endblock %}
+
+{% block content %}
+    <div id="register_window">
+        <div style="font-size:50px">Register</div>
+        <div>
+            <div style="margin-bottom:5px;">Username</div>
+            <div style="margin-bottom:5px;"><input id="username_input"></div>
+            <div style="margin-bottom:5px;">Password</div>
+            <div style="margin-bottom:5px;"><input type="password" id="password_input"></div>
+            <div style="margin-bottom:5px;">Repeat Password</div>
+            <div style="margin-bottom:5px;"><input type="password" id="password2_input"></div>
+            <div style="margin-bottom:5px;">Email</div>
+            <div style="margin-bottom:5px;"><input id="email_input"></div>                             
+        </div>
+        <div><button>Create Account</button></div>
+    </div>
+{% endblock %}

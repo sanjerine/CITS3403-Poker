@@ -1,0 +1,84 @@
+{% extends "base.html" %}
+
+{% block title %}Home{% endblock%}
+{% block head %}
+  {{ super() }}
+  <style type="text/css">
+    #opening_window {
+      height:70vh;
+    }
+    #poker_text {
+      display:flex;
+      font-size:150px;
+    }
+    #cards {
+      display:flex;
+      flex-direction:row;
+      width:100%;
+      justify-content:space-around;
+    }
+    /* flip card code taken from  w3 is this actually allowed lol */
+    .flip-card {
+      background-color: transparent;
+      width: 150px;
+      height: 200px;
+      perspective: 1000px;
+    }
+
+    .flip-card-inner {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      text-align: center;
+      transition: transform 0.8s;
+      transform-style: preserve-3d;
+    }
+
+    /* Do an horizontal flip when you move the mouse over the flip box container */
+    .flip-card:hover .flip-card-inner {
+      transform: rotateY(180deg);
+    }
+
+    /* Position the front and back side */
+    .flip-card-front, .flip-card-back {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      -webkit-backface-visibility: hidden; /* Safari */
+      backface-visibility: hidden;
+    }
+
+    /* Style the back side */
+    .flip-card-back {
+      transform: rotateY(180deg);
+    }    
+  </style>
+{% endblock %}
+
+{% block content %}
+  <div id="poker_text">Poker.</div>
+  <div id="cards">
+    <div class="flip-card">
+      <div class="flip-card-inner">
+        <div class="flip-card-front">
+          <img src="https://i.ibb.co/1zGkZHV/statistics.png" alt="Statistics" style="width:150px">
+        </div>
+        <div class="flip-card-back">
+          <h1><a href='/statistics'>Statistics</a></h1>
+          <p>Check your stats on our award-winning game!</p>
+        </div>
+      </div>
+    </div>
+    <div class="flip-card">
+      <div class="flip-card-inner">
+        <div class="flip-card-front">
+          <img src="https://i.ibb.co/XJRjgxV/play.png" alt="Avatar" style="width:150px">
+        </div>
+        <div class="flip-card-back">
+          <h1><a href='/tutorial'>Tutorial</a></h1>
+          <p>A helpful resource for learning all of this together!</p>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}
