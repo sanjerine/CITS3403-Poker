@@ -71,7 +71,11 @@ class Results(db.Model):
     id = db.Column(db.Integer, primary_key = True)
     userid = db.Column(db.Integer, db.ForeignKey('user.id'))
     result = db.Column(db.Integer)
-    
 
+
+class Progress(db.Model):
+    id = db.Column(db.Integer, primary_key = True)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    progress = db.Column(db.Integer)
 #create database using mixin from flask_login or otherwise
 #one for users, one for the poker hands (4 suits, 13 cards), one for outcome? dunno
