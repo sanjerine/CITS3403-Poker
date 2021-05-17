@@ -127,3 +127,9 @@ def register():
   return render_template('register.html', title = 'Register', form=form) 
 
 
+@app.route('/admin', methods = ['GET', 'POST'])
+@login_required
+def admin():
+    reurn render_template('admin/index.html', title = 'Admin')                                  
+          
+                                
