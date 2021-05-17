@@ -63,12 +63,12 @@
         }
         if (hand == 1) {
             var suit = suits[Math.floor(Math.random() * suits.length)];
-            var card = Math.floor(Math.random() * 9) + 6;
+            var card = Math.floor(Math.random() * 8) + 6;
             for (i = 0; i < cards.length; i++) {
                 cards[i] = genString(card,suit);  
                 card -= 1;  
             }
-    }
+        }
         if (hand == 2) {
                 var card = Math.floor(Math.random() * 13) + 2;
                 for (i = 0; i < 4; i++) {
@@ -179,6 +179,7 @@
             str += hand[i];
             cards[i].setAttribute("src",str);
         }
+
     }
     var gameState = false;
     var progress = false;
@@ -201,6 +202,7 @@
             var num = Math.floor(Math.random() * ceiling);
             hand = hands[num];
             replaceCards(genHand(num));
+            console.log(num, hand);
         }
         else {
             element = document.getElementById("inp");
@@ -244,7 +246,7 @@
 {% endblock %}
 
 {% block content %}
-    <div id="progress"></div>
+    <progress style="color:#644064;width:500px;margin-bottom:30px;" id="lineprogress" value="" max="32"></progress>
     <div style="display:flex;flex-direction:row;justify-content:space-between;width:725px;">
         <div id = "welcome_text" style="display:flex;flex-direction:column;height:400px; width:150px; background-color:#644064;border-radius:15px;padding:15px;">
             <p id="boxtext">Welcome to the world of Poker!</p>
@@ -259,7 +261,7 @@
                 <img class="cardimg" src="/static/deck/red_joker.png">    
             </div>
             <div id = "gametext">
-                <input id="inp" style="width:350px" placeholder="What hand could this be...?">
+                <input id="inp" style="width:350px;" placeholder="What hand could this be...?">
                 <button id="butt1" onclick="checkAnswer(current_ceiling)" style="width:150px">Check it!</button> 
                 <div style="margin:auto;margin-top:20px;width:250px;display:flex;flex-direction:row;text-align:center;justify-content:space-around;">
                     <div>Right: <div class="counter" id="right">0</div></div>
@@ -281,7 +283,7 @@
         var lines = [
         "",
         "Today we're going to learn how to identify each of the different poker hands.",
-        "Let's start with the highest hand - the Royal Flush.",
+        "Today we're going to learn each poker hand. Let's start with the highest hand - the Royal Flush.",
         "The Royal Flush is comprised of the five highest cards of the same suit.",
         "That is, the A, K, Q, J, and 10.",
         "That wasn't so bad, was it? Now let's introduce another hand.",
@@ -315,6 +317,7 @@
         var line = 1;
         var current_ceiling = 2;  
         function continueGame() {
+            document.getElementById("lineprogress").setAttribute("value", line)
             var rightnum = document.getElementsByClassName("counter")[0].innerHTML;
             if (gameState == true) {
                 return;         
@@ -327,6 +330,7 @@
             }
             if (line == 7) {
                 gameState = true;
+                document.getElementById("")
             }        
             if (line == 9) {
                 replaceCards(["12h.png","12d.png","12c.png","12s.png","8h.png"]);
