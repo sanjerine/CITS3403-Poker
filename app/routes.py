@@ -75,12 +75,30 @@ def quiz():
             results = Results(userres = current_user)
             db.session.add(results)
             db.session.commit()
-        cureent_user.results.result = result
+        current_user.results.result = result
         db.session.commit()                   
                             
         return redirect(url_for('index'))                 
                             
     return render_template('quiz.html', title = 'Quiz', questions = questions) 
+
+@app.route('/tutorial', methods = ['GET', 'POST'])
+@login_required
+def tutorial():
+
+    if request.method=="POST":
+        if not bool(TutorialResults.query.filter_by(userid = current_user.id).first()):
+            results=Results(userres=current_user)
+            db.session.add(results)
+            db.session.commit()
+        current_user.results.result = result
+        db.session.commit()
+
+        return redirect(url_for('index'))                 
+                            
+    return render_template('tutorial.html', title = 'tutorial')
+    
+
 
 @app.route('/feedback', methods = ['GET', 'POST'])
 @login_required
@@ -132,6 +150,5 @@ def register():
 @app.route('/admin', methods = ['GET', 'POST'])
 @login_required
 def admin():
-    reurn render_template('admin/index.html', title = 'Admin')                                  
-          
+    reurn render_template('admin/index.html', title = 'Admin')            
                                 
