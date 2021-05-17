@@ -57,7 +57,9 @@ def logout():
 @login_required
 def quiz():
 
-    questions = Question.query.filter_by(question.id = id) #HOW TO JUST GET ALL QUESTION maybe function in data base
+    #questions = Question.query.filter_by(question.id = id) #HOW TO JUST GET ALL QUESTION maybe function in data base
+    questions = Question.query.all()
+    
     
     result = 0
                             
