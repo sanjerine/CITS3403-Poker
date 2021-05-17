@@ -9,9 +9,19 @@
 
 {% block content %}
     <div style="display:flex;align-items:flex-start;flex-direction:column;">
-        {% for post in posts %}
-
+        {% for question in questions %}
+        <div class = "question-body">
+            <h1 class="question">{{question.questionbody}}</h1>
+            <div class = "answers">
+                {%for answer in question.answers%}
+                    <input type = "radio" name = "{{question.id}}" id = {{answer.id}}" value = "{{answer.answerbody}}" required>
+                    <label for="{{answer.id}}> {{answer.answerbody}} </label>
+                {% endfor %}
+            </div>
+        </div>
         {% endfor %}
+          
+        
         <div style="display:flex;flex-direction:column;">
             <div class="question"><h3>What is the question?</h3></div>
             <div class="answers">
