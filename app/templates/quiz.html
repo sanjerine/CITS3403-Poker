@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+{% block title %}Home{% endblock%}
+{% block head %}
+  {{ super() }}
+<style>
+</style>
+{% endblock %}
+
+{% block content %}
+    <div style="display:flex;align-items:flex-start;flex-direction:column;">
+        {% for post in posts %}
+
+        {% endfor %}
+        <div style="display:flex;flex-direction:column;">
+            <div class="question"><h3>What is the question?</h3></div>
+            <div class="answers">
+                <p>a) this answer</p>
+                <p>b) this answer</p>
+                <p>c) this answer</p>
+                <p>d) this answer</p>
+            </div>
+            <div class="answer">
+                    <input id="answer1" type="checkbox">Answer 1
+                    <input id="answer2" type="checkbox">Answer 2
+                    <input id="answer4" type="checkbox">Answer 3
+                    <input id="answer3" type="checkbox">Answer 4
+            </div>
+        </div>
+        <div style="display:flex;flex-direction:column;">
+            <div class="question"><h3>What is the question?</h3></div>
+            <div class="answer">
+                <ul>
+                    <li id="answer1"><input id="answer1" type="checkbox">Answer 1</li>
+                    <li id="answer2"><input id="answer2" type="checkbox">Answer 2</li>
+                    <li id="answer3"><input id="answer3" type="checkbox">Answer 3</li>
+                    <li id="answer4"><input id="answer4" type="checkbox">Answer 4</li>
+                </ul>
+            </div>
+        </div>        
+    </div>
+{% endblock %}
