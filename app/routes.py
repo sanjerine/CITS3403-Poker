@@ -118,8 +118,12 @@ def feedback():
 @app.route('/stats')
 def stats(): 
     tutorial_results=[]
-    for result in db.session.query(Result.num_correct).join(User).filter(User.id==(current_user.get_id())):
+    for result in db.session.query(Result.result).join(User).filter(User.id==(current_user.get_id())):
         tutorial_results.append(result[0])
+    highscores=[]
+    for score,username in db.session.query(Result.highscore).join(User).filter((User.id==(current_user.get_id()).orderby(Result.highscore.amount.desc().limit(10)):
+        highscores.append([username,score])
+        
                                    
     result = ''
     qsum = ''
