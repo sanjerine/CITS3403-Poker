@@ -4,9 +4,54 @@
 {% block head %}
   {{ super() }}
 <style>
+    #text {
+        display:block;
+        width:87vr;
+      }
+    .myfooter {
+        position:relative;
+    }
+    p {
+        text-align:left;
+        text-indent:50px;
+    }
+    h1,h2,h3,h4 {
+        text-align:left;
+    }
+    button {
+        border: 3px solid #ccc;
+    }
 </style>
 {% endblock %}
 
 {% block content %}
-
+<div id="text">
+<h1>Rules</h1><hr>
+<h3>Rounds</h3><hr>
+<p>In each round of Poker, there will be at least one opportunity for players to bet on their hands.</p>
+<p>Each round starts when any player makes a bet of one or more chips.</p>
+<h3>Betting</h3><hr>
+<p>Before any of the cards are dealt, each player tosses in an initial contribution (an 'ante') of a predetermined amount into the pot.</p>
+<p>The next player to the left must take an action, either <b>call</b>, <b>raise</b>, <b>check</b> or <b>fold</b>.</p>
+<h5>Actions</h5>
+<p><b>Calling</b> means betting the same amount of chips, while <b>raising</b> means betting more than the call amount.</p>
+<p><b>Checking</b> has the effect of a bet of zero, but can only be done if no one has made a bet so far.</p>
+<p>The final option is to fold (also known as a drop), which means that a player does not bet any chips, discards their hand, and is not allowed to play until the next round of cards is dealt.</p><br>
+<p>A round of poker starts with two cards being dealth to each player, which only they are allowed to use.</p>
+<p>Betting rounds end when each player has either folded, or put in exactly as much money as every other player.</p>
+<ul>
+    <li>After the round begins, the 1st betting round commences, after which 3 community cards are dealt to the middle of the table, face-up, for everyone to use.</li>
+    <li>After the second betting round, the 4th community card is dealt. The third betting round now begins.</li>
+    <li>After the third betting round, the 5th and last community card is dealt. The final round of betting commences now.</li>
+    <li>After the last round of betting concludes, players 'reveal' their hands - and the highest wins.</li>
+</ul>
+<h3>Misc</h3><hr>
+<p>Games go on for as long as the players want - but generally a pre-set amount of rounds or time is determined before play.</p>
+<p></p>
+</div>
+<div>
+    <button onclick="location.href='quiz.html';">
+        Think you've got it...? Take the quiz!
+    </button>
+</div>
 {% endblock %}
