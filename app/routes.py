@@ -25,12 +25,8 @@ def before_request():
 #all the routes that we want to include underneath here
 @app.route('/index')
 def index():
-  if not current_user.is_authenticated:
     return render_template('index.html', title = 'Home') 
 
-@app.route('/learn')
-def learn():
-    return render_template('learn.html', title = 'Learn') 
 
 @app.route('/login', methods = ['GET', 'POST'])
 def login():
@@ -141,25 +137,25 @@ def stats():
 
     return render_template('statistics.html', title = 'Statistics')
     
-@app.route('/register')
+@app.route('/register', methods = ['GET', 'POST'])
 def register():
+
   if current_user.is_authenticated:
     return redirect(url_for('index'))
   form = RegistrationForm()
   if form.validate_on_submit():
-    user = User(username=form.username.data, email=form.data)
+    user = User(username=form.username.data, email=form.email.data)
     user.set_password(form.password.data)
     db.session.add(user)
     db.session.commit()
     flash("You are now a registered!")
-    return redirect(url_for('login'))
+    return redirect(url_for('index'))
   return render_template('register.html', title = 'Register', form=form) 
 
 
 @app.route('/admin', methods = ['GET', 'POST'])
 @login_required
 def admin():
-    return render_template('admin/index.html', title = 'Admin')            
-                                
+    return render_template('admin/index.html', title = 'Admin')       
     
                                 
