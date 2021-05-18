@@ -8,7 +8,7 @@ These instructions will get you a copy of this website running on a local machin
 
 ### Prerequisites
 
-Python 
+Python 3.7.
 
 on linux:
 
