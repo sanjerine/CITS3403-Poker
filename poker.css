@@ -1,10 +1,36 @@
+#opening_window {
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center
+}
 body {
-    background-color:#9F6BA0; 
-    color:#F5CCE8;
+  background-color:#9F6BA0; 
+  color:#F5CCE8;
   }
 .myfooter {
-    color: rgba(255, 255, 255, .5);
-    position:absolute;
-    bottom: 0;
-    padding-bottom:1%;
+  color: rgba(255, 255, 255, .5);
+  position:absolute;
+  bottom: 0;
+  padding-bottom:1%;
+}
+a:link {
+  color: #F5CCE8;
+}
+a:visited {
+  color: #F5CCE8;
+}
+a:hover {
+  color: #F5CCE8;
+}
+a:active {
+  color: #F5CCE8;
+}
+input {
+  border-radius:5px;
+  border: none;
+}
+button {
+  border: 1px solid #ccc;
+  border-radius:5px;
 }
