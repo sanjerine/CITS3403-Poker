@@ -1,23 +1,47 @@
-  
 {% extends "base.html" %}
 
 {% block title %}Statistics{% endblock%}
 {% block head %}
   {{ super() }}
 <style>
+  #table_window {
+    flex-direction:row;
+    justify-content:space-around;
+  } 
 </style>
 {% endblock %}
 
 {% block content %}
     <h1>Statistics</h1>
-    <div class=container>
-        <h2>Your Statistics</h2>
-        {% for result in tutorial_results %}
-            <p>{{ result }}</p>
-        <h2>High Scores</h2>
-        {% for i in range 10 %}
-            <p>{{highscores[i]}}</p>
-        <h2>Number of Users - {{numUsers}}</h2>
-    </div>
+    <div id="table_window">
+      <div>
+          <h2>High Scores</h2>
+          <table style="width:350px">
+            <tr>
+              <th><b>Scores</b>></th>
+            </tr>
+            {% for i in range 10 %}
+            <tr>
+              <td>{{highscores[i]}}</td>
+            </tr>
+            {% endfor %}
+          </table>
+      </div>
+          <h2>Your Statistics</h2>
+          <div>
+            <h2>Your Statistics</h2>
+            <table style="width:350px">
+              <tr>
+                <th><b>Your Statistics</b>></th>
+              </tr>
+              {% for result in tutorial_results %}
+                <tr>
+                  <td>{{ result }}</td>
+                </tr>
+              {% endfor %}  
+            </table>
+        </div>
+      </div>
+      <h3>Number of Users - {{numUsers}}</h3>
 
 {% endblock %}
