@@ -112,20 +112,8 @@ def feedback():
                                    
     current_user.feedback.filter_by(user_id = current_user.id).first().feedbackmsg = feedbackrequest  #note maked feedback data base feedback into feedbackmsg
     db.session.commit()
-                                  
-    return render_template('feedback.html', title = 'Feedback') 
-
-@app.route('/stats')
-def stats(): 
-    tutorial_results=[]
-    for result in db.session.query(TutorialResults.result).join(User).filter(User.id==(current_user.get_id())):
-        tutorial_results.append(result)
-    highscores=[]
-    for score,username in db.session.query(TutorialResults.highscore).join(User).filter((User.id==(current_user.get_id()).orderby(TutorialResults.highscore.amount.desc().limit(10)):
-        highscores.append([username,score])
-    numUsers=db.session.query(User).count()
-
-                                                                                
+                                   
+                                                                                    
                                                            
                                    
     result = ''
@@ -136,10 +124,22 @@ def stats():
         qsum = db.session.query(func.sum(Question.mark)).scalar()    #ummm dunno lol
         result = current_user.results.result
         percentage = int((result/qsum) *100)                           
-    
-                                   
-    return render_template('Statistics.html', title = 'Statistics', result = result, sum = qsum, percentage = percentage) 
+                                        
+                                  
+    return render_template('feedback.html', title = 'Feedback', result = result, sum = qsum, percentage = percentage) 
 
+@app.route('/statistics')
+def stats(): 
+    tutorial_results=[]
+    for result in db.session.query(TutorialResults.result).join(User).filter(User.id==(current_user.get_id())):
+        tutorial_results.append(result)
+    highscores=[]
+    for score,username in db.session.query(TutorialResults.highscore).join(User).filter((User.id==(current_user.get_id()).orderby(TutorialResults.highscore.amount.desc().limit(10)):
+        highscores.append([username,score])
+    numUsers=db.session.query(User).count()
+
+
+    return render_templates('statistics.html', title = 'Statistics')
     
 @app.route('/register')
 def register():
