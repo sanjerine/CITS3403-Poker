@@ -1,19 +1,15 @@
 #database
-from app import db, login
-from flask_login import UserMixin
+from app import db
 from werkzeug.security import generate_password_hash, check_password_hash
 import random
 
-
-
-class User(UserMixin, db.Model):
+class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(64), index=True, unique=True)
     email = db.Column(db.String(120), index=True, unique=True)
     password_hash = db.Column(db.String(128))
     
-    feedback = db.relationship('Feedback', backref='userfeedback', lazy ='dynamic')
-    userresult = db.relationship('Results', backref'user', lazy = 'dynamic')
+
     
     def __repr__(self):
         return '<User {}>'.format(self.username)
@@ -27,11 +23,6 @@ class User(UserMixin, db.Model):
     def get_id(self):
         return self.id
     
-@login.user_loader
-def load_user(id):
-    return User.query.get(int(id))
-
-
 class Feedback (db.Model):
     id = db.Column(db.Integer, primary_key=True)
     feedbackmsg = db.Column(db.Text, index=True)
@@ -77,17 +68,3 @@ class Results(db.Model):
     id = db.Column(db.Integer, primary_key = True)
     userid = db.Column(db.Integer, db.ForeignKey('user.id'))
     result = db.Column(db.Integer)
-    highscore = db.Column(db.Integer)
-    
-class TutorialResults(db.Model):
-    id = db.Column(db.Integer, primary_key = True)
-    userid = db.Column(db.Integer, db.ForeignKey('user.id'))
-    result = db.Column(db.Integer)
-
-
-class Progress(db.Model):
-    id = db.Column(db.Integer, primary_key = True)
-    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
-    progress = db.Column(db.Integer)
-#create database using mixin from flask_login or otherwise
-#one for users, one for the poker hands (4 suits, 13 cards), one for outcome? dunno
