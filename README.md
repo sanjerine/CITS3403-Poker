@@ -22,7 +22,21 @@ on mac:
 $ brew install python3
 ```
 
-on windows go to the python website and download the installer.
+On windows downloading the python installer will be sufficient. 
+
+### Running the program
+
+Navigate to the directory and execute the following commandto install the virtual environment.
+
+```
+$ venv/Scripts/activate
+```
+
+Once virtual environment is installed, unit tests can be run using:
+
+```
+$ flask run
+```
 
 ## Running the tests
 
