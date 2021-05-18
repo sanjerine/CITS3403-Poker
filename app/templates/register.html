@@ -32,7 +32,7 @@
                 <div>
                     <div style="margin-bottom:5px;"> {{form.username.label}} </div>
                   
-                    <div style="margin-bottom:5px;"><input id="username_input"> {{form.username(size=32)}} </div>
+                    <div style="margin-bottom:5px;"> {{form.username(size=32)}} </div>
                   
                     {% for error in form.username.errors%}
                     <span class="error" style="color: black;">[{{ error }}]</span>
@@ -40,7 +40,7 @@
                   
                     <div style="margin-bottom:5px;"> {{ form.email.label }} </div>
                   
-                    <div style="margin-bottom:5px;"><input id="email_input"> {{ form.email(size=64) }} </div>  
+                    <div style="margin-bottom:5px;"> {{ form.email(size=32) }} </div>  
                   
                     {% for error in form.email.errors%}
                     <span class="error" style="color: black;">[{{ error }}]</span>
@@ -48,16 +48,16 @@
                   
                     <div style="margin-bottom:5px;"> {{ form.password.label }} </div>
                   
-                    <div style="margin-bottom:5px;"><input type="password" id="password_input"> {{ form.password(size=32) }} </div>
+                    <div style="margin-bottom:5px;"> {{ form.password(size=32) }} </div>
                     
                     {% for error in form.password.errors%}
                     <span class="error" style="color: black;">[{{ error }}]</span>
                     {% endfor %}
 
-                    <div style="margin-bottom:5px;"> {{ form.password2.label }} </div>
-                    <div style="margin-bottom:5px;"><input type="password" id="password2_input"> {{ form.password2(size=32) }} </div>
+                    <div style="margin-bottom:5px;"> {{ form.repeatpassword.label }} </div>
+                    <div style="margin-bottom:5px;"> {{ form.repeatpassword(size=32) }} </div>
                     
-                    {% for error in form.password2.errors%}
+                    {% for error in form.repeatpassword.errors%}
                     <span class="error" style="color: black;">[{{ error }}]</span>
                     {% endfor %}
                             
@@ -67,6 +67,6 @@
                   
               </div>
           </form>
-        <div><button>Create Account</button></div>
+        <div>
     </div>
 {% endblock %}
