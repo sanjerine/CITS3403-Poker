@@ -15,39 +15,11 @@
                 <h1 class="question">{{question.questionbody}}</h1>
                 <div class = "answers">
                     {%for answer in question.answers%}
-                        <input type = "radio" name = "{{question.id}}" id = {{answer.id}}" value = "{{answer.answerbody}}" required>
-                        <label for="{{answer.id}}> {{answer.answerbody}} </label>
+                        <input type = "radio" name = "{{question.id}}" id = "{{answer.id}}" value = "{{answer.answerbody}}" required>
+                        <label for="{{answer.id}}"> {{answer.answerbody}} </label>
                     {% endfor %}
                 </div>
             </div>
-            {% endfor %}
-          
-        
-        <div style="display:flex;flex-direction:column;">
-            <div class="question"><h3>What is the question?</h3></div>
-            <div class="answers">
-                <p>a) this answer</p>
-                <p>b) this answer</p>
-                <p>c) this answer</p>
-                <p>d) this answer</p>
-            </div>
-            <div class="answer">
-                    <input id="answer1" type="checkbox">Answer 1
-                    <input id="answer2" type="checkbox">Answer 2
-                    <input id="answer4" type="checkbox">Answer 3
-                    <input id="answer3" type="checkbox">Answer 4
-            </div>
-        </div>
-        <div style="display:flex;flex-direction:column;">
-            <div class="question"><h3>What is the question?</h3></div>
-            <div class="answer">
-                <ul>
-                    <li id="answer1"><input id="answer1" type="checkbox">Answer 1</li>
-                    <li id="answer2"><input id="answer2" type="checkbox">Answer 2</li>
-                    <li id="answer3"><input id="answer3" type="checkbox">Answer 3</li>
-                    <li id="answer4"><input id="answer4" type="checkbox">Answer 4</li>
-                </ul>
-            </div>
-        </div>        
+            {% endfor %}      
     </div>
 {% endblock %}
