@@ -3,6 +3,7 @@
 {% block title %}Tutorial{% endblock%}
 {% block script %}
 <script>
+    <!-- most of this is js code for the game-->
     var suits = ["c","s","h","d"];
     var hands = ["Royal Flush","Straight Flush","Four of a Kind","Full House", "Flush","Straight","Three of a Kind","Two Pair","Pair","High Card"];
     var hand = "Straight Flush"
@@ -258,11 +259,11 @@
 {% block content %}
     <progress style="color:#644064;width:500px;margin-bottom:30px;" id="lineprogress" value="" max="32"></progress>
     <div style="display:flex;flex-direction:row;justify-content:space-between;width:725px;">
-        <div id = "welcome_text" style="display:flex;flex-direction:column;height:400px; width:150px; background-color:#644064;border-radius:15px;padding:15px;">
+        <div id = "welcome_text" style="display:flex;flex-direction:column;height:400px;width:150px;background-color:#644064;border-radius:15px;padding:15px;">
             <p id="boxtext">Welcome to the world of Poker!</p>
             <button id="continue"><b>Continue</b></button>
         </div>
-        <div style="display:flex;flex-direction:column;justify-content:space-around;border-radius:15px;background-color:#B78FB7; width:550px; height: 400px; align-items:center">
+        <div style="display:flex;flex-direction:column;justify-content:space-around;border-radius:15px;background-color:#B78FB7;width:550px;height:400px;align-items:center">
             <div id="cards">
                 <img class="cardimg" src="/static/deck/red_joker.png">
                 <img class="cardimg" src="/static/deck/red_joker.png">
