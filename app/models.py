@@ -77,13 +77,13 @@ class Results(db.Model):
     id = db.Column(db.Integer, primary_key = True)
     userid = db.Column(db.Integer, db.ForeignKey('user.id'))
     result = db.Column(db.Integer)
-    highscore = db.Column(db.Integer)
+
     
 class TutorialResults(db.Model):
     id = db.Column(db.Integer, primary_key = True)
     userid = db.Column(db.Integer, db.ForeignKey('user.id'))
     result = db.Column(db.Integer)
-
+    highscore = db.Column(db.Integer)
 
 class Progress(db.Model):
     id = db.Column(db.Integer, primary_key = True)
