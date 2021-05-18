@@ -34,14 +34,17 @@
         <li class="nav-item">
           <a class="nav-link" href="/statistics">Statistics</a>
         </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/quiz">Quiz</a>
+        </li>
       </ul>
-      {% if user.is_authenticated %}
+      {% if current_user.is_authenticated %}
       <ul class="navbar-nav ml-auto">
         <li class="nav-item">
           <a class="nav-link" href="/feedback">Feedback</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/Logout">Logout</a>
+          <a class="nav-link" href="/logout">Logout</a>
         </li>
       </ul>
       {% else %}
@@ -55,15 +58,6 @@
       </ul>
       {% endif %}
       </div>
-      <!-- loged in navbar 
-        <ul class="navbar-nav ml-auto">
-        <li class="nav-item">
-          <a class="nav-link" href="/mystats">My Stats</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="/logout">Log Out</a>
-      </ul>
-      -->
     </nav>    
     <div id="opening_window">
       {% block content %}
@@ -74,3 +68,4 @@
 
 </body>
 </html>
+
