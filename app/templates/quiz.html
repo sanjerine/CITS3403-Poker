@@ -21,8 +21,8 @@
                 <h4 class="question">{{question.questionbody}}</h4>
                 <div class = "answers" style="display:flex;flex-direction:column;">
                     {%for answer in question.answers%}
-                        <input type = "radio" name = "{{question.id}}" id = "{{answer.id}}" value = "{{answer.answerbody}}" required>
-                        <label for="{{answer.id}}"> {{answer.answerbody}} </label>
+                        <div style="display:flex;flex-direction:row"><input type = "radio" name = "{{question.id}}" id = "{{answer.id}}" value = "{{answer.answerbody}}" required>
+                        <label for="{{answer.id}}"> {{answer.answerbody}} </label></div>
                     {% endfor %}
                 </div>
             </div>
