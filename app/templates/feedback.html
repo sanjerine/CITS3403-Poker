@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-{% block title %}Feedback{% endblock%}
+{% block title %}Home{% endblock%}
 {% block head %}
   {{ super() }}
 <style>
@@ -10,39 +10,39 @@
 {% block content %}
     <!-- link href = " whatever style or something" -->
     <div class="page">
-        <h1> results </h1>
+        <h1> Results </h1>
             {% if result%}
-                <h2>Welcome {{current_user.username}}! </br>
-                    Thanks for taking your time to do our quiz </br>
+                <div><h2>Welcome {{current_user.username}}!</h2><br>
+                    Thanks for taking your time to do our quiz <br>
                     {% if {{percentage}} >= 75 %}
-                        <h3> You are amazing at poker, </br>
-                              You got a {{result}} out of {{sum}}, {{percentage}}% </br>
+                        <h3> You are amazing at poker, <br>
+                             You got a {{result}} out of {{sum}}, {{percentage}}% <br>
                              Perhaps you should go pro!
                         </h3>
                     {% if 50 <= {{percentage}} <75 %}
-                        <h3> You did pretty well, </br>
-                             You got a {{result}} out of {{sum}}, {{percentage}}%. </br>
+                        <h3> You did pretty well, <br>
+                             You got a {{result}} out of {{sum}}, {{percentage}}%. <br>
                              Continue practising to be the best!
                         </h3>
                     {% if 25 <= {{percentage}} <50 %}
-                        <h3> Nice try!, </br>
-                             You got a {{result}} out of {{sum}}, {{percentage}}%. </br>
+                        <h3> Nice try!, <br>
+                             You got a {{result}} out of {{sum}}, {{percentage}}%. <br>
                              Maybe try going over the tutorial again, and keep practising. You got this!
                         </h3>
                     {% if {{percentage}} <25 %}
-                        <h3> Damn, you suck! But in a good way. </br>
-                             You got a {{result}} out of {{sum}}, {{percentage}}%. </br>
-                             Ur clapped get good.
+                        <h3> Damn, you suck! But in a good way. <br>
+                             You got a {{result}} out of {{sum}}, {{percentage}}%. <br>
+                             Better luck next time!
                         </h3>
-                  </h2>
+                    </div>
             {% else %}
                 <h3> Please complete the quiz to view your results! </h3>
             {%endif%}
         <div id = "feedbackform">
-        <h3>Please consider leaving some feedback as to what you enjoyed, </br>
+        <h3>Please consider leaving some feedback as to what you enjoyed, <br>
             And what we could improve on. </h3>
             <form action="", method = "post" >
-               <h3><label for"feedback">Place feedback in area below</label></h2>
+               <h3><label for="feedback">Place feedback in area below</label></h2>
                <textarea rows="6" cols="80" name="feedback" id="feedback" required></textarea>
                <div class="submitbutton">
                    <input type="submit" value="submit">
