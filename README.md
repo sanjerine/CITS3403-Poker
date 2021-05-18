@@ -29,7 +29,7 @@ On windows downloading the python installer will be sufficient.
 Navigate to the directory and execute the following commandto install the virtual environment.
 
 ```
-$ venv/Scripts/activate
+venv/Scripts/activate
 ```
 
 Once virtual environment is installed, unit tests can be run using:
