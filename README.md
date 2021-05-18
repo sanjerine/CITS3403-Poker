@@ -13,13 +13,13 @@ Python 3.7.
 on linux:
 
 ```
-$ sudo apt-get install python3.6
+sudo apt-get install python3.6
 ```
 
 on mac:
 
 ```
-$ brew install python3
+brew install python3
 ```
 
 On windows downloading the python installer will be sufficient. 
@@ -35,14 +35,14 @@ $ venv/Scripts/activate
 Once virtual environment is installed, unit tests can be run using:
 
 ```
-$ flask run
+flask run
 ```
 
 ## Running the tests
 
 Python unit tests can be run using the following:
 ```
-$ seleniumtesting.py
+seleniumtesting.py
 ```
 
 
