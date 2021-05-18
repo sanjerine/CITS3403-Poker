@@ -28,7 +28,7 @@ def index():
   if not current_user.is_authenticated:
     return render_template('index.html', title = 'Home') 
 
-@app.route('learn')
+@app.route('/learn')
 def learn():
     return render_template('learn.html', title = 'Learn') 
 
@@ -104,7 +104,7 @@ def tutorial():
 @login_required
 def feedback():
   if request.method == "POST":
-    feedbackrequest = request.form["feedback']
+    feedbackrequest = request.form['feedback']
     if not bool(Feedback.query.filter_by(user_id = current_user.id).first()):
       feedback = Feedback(feedbackuser = current_user)
       db.session.add(feedback)
@@ -130,16 +130,16 @@ def feedback():
 
 @app.route('/statistics')
 def stats(): 
-    tutorial_results=[]
-    for result in db.session.query(TutorialResults.result).join(User).filter(User.id==(current_user.get_id())):
-        tutorial_results.append(result)
+    #tutorial_results=[]
+    #for result in db.session.query(TutorialResults.result).join(User).filter(User.id==(current_user.get_id())):
+        #tutorial_results.append(result)
     highscores=[]
-    for score,username in db.session.query(TutorialResults.highscore).join(User).filter((User.id==(current_user.get_id()).orderby(TutorialResults.highscore.amount.desc().limit(10)):
-        highscores.append([username,score])
+    #for score,username in db.session.query(TutorialResults.highscore).join(User).filter((User.id==(current_user.get_id()).orderby(TutorialResults.highscore.amount.desc().limit(10)):
+        #highscores.append([username,score])
     numUsers=db.session.query(User).count()
 
 
-    return render_templates('statistics.html', title = 'Statistics')
+    return render_template('statistics.html', title = 'Statistics')
     
 @app.route('/register')
 def register():
@@ -159,5 +159,7 @@ def register():
 @app.route('/admin', methods = ['GET', 'POST'])
 @login_required
 def admin():
-    reurn render_template('admin/index.html', title = 'Admin')            
+    return render_template('admin/index.html', title = 'Admin')            
+                                
+    
                                 
