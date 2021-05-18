@@ -1,8 +1,32 @@
 # CITS3403-Poker
-Repository for CITS3403 Poker Work
 
+This project aimed to teach people the hands and rules of poker in a simple web-app environment. Users can log in and play an interactive game teaching them the hands, as well as take a quiz on the rules of poker. These statistics (on game stats and quiz feedback) is availabe after completion. 
 
-References
+## Getting Started
+
+These instructions will get you a copy of this website running on a local machine. 
+
+### Prerequisites
+
+Python 
+
+on linux:
+
+```
+$ sudo apt-get install python3.6
+```
+
+on mac:
+
+```
+$ brew install python3
+```
+
+on windows go to the python website and download the installer.
+
+## Running the tests
+
+## References
 
 ACBL - Resource Center. 2021. 52 Playing Cards. [online] Available at: <http://acbl.mybigcommerce.com/52-playing-cards/> [Accessed 18 May 2021]. (playing card images)
 
@@ -10,4 +34,4 @@ Flaticon. 2021. Playing Cards free vector icons designed by Freepik. [online] Av
 
 W3schools.com. 2021. How To Create a Flip Card with CSS. [online] Available at: <https://www.w3schools.com/howto/howto_css_flip_card.asp> [Accessed 18 May 2021]. (flip-card css)
 
-All other images used created by me (22974396)
+All other images used created by group members.
