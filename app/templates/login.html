@@ -51,16 +51,7 @@
                 {{form.submit()}}
             </div> 
       </form>   
-            <div>
-                <div style="margin-bottom:5px;">Username</div>
-                <div style="margin-bottom:5px;"><input id="username_input"></div>
-                <div style="margin-bottom:5px;">Password</div>
-                <div style="margin-bottom:5px;"><input type="password" id="password_input"></div>
-            
-        </div>
-        <div><button>Submit</button></div>
         <div>
-          <p><a href="{{ url_for('register') }}"> Click to register </a></p>
-        <div>Forget password? Click <a href=#><b>here!</b></a></div>
-    </div>
+        <div>No account? Click <a href="{{ url_for('register') }}"><b>here!</b></a></div>
+        </div>
 {% endblock %}
