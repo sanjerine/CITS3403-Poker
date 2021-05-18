@@ -47,6 +47,11 @@ def logout():
   logout_user()
   return redirect(url_for('index'))
 
+@app.route('/rules')
+@login_required
+def rules():
+    return render_template('rules.html', title = 'Rules') 
+
   
 
 @app.route('/quiz', methods = ['GET', 'POST'])
@@ -74,7 +79,7 @@ def quiz():
         current_user.userresult[0].result = result
         db.session.commit()                   
                             
-        return redirect(url_for('feedback'))                 
+        return redirect(url_for('index'))                 
                             
     return render_template('quiz.html', title = 'Quiz', questions = questions,answer=answer) 
 
@@ -102,12 +107,14 @@ def feedback():
     if request.method == "POST":
         feedbackrequest = request.form['feedback']
         if not bool(Feedback.query.filter_by(user_id = current_user.id).first()):
-            feedback = Feedback(feedbackuser = current_user)
+            feedback = Feedback(userfeedback = current_user)
             db.session.add(feedback)
             db.session.commit()
                                    
         current_user.feedback.filter_by(user_id = current_user.id).first().feedbackmsg = feedbackrequest  #note maked feedback data base feedback into feedbackmsg
         db.session.commit()
+
+        return redirect(url_for('index')) 
                       
     cresult = ""
     qsum = 10
@@ -116,8 +123,7 @@ def feedback():
     if bool(Results.query.filter_by(userid = current_user.id).first()):    #ummm dunno lol
         cresult = int(current_user.userresult[0].result)
         percentage = int((cresult/qsum) *100)                           
-                                        
-                                  
+                                                                      
     return render_template('feedback.html', title = 'Feedback', result = cresult, sum = qsum, percentage = percentage) 
 
 @app.route('/statistics')
@@ -154,5 +160,4 @@ def register():
 def admin():
     return render_template('admin/index.html', title = 'Admin')            
                                  
-    
-                                
+                       
