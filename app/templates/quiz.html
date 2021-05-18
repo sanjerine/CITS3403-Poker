@@ -4,6 +4,12 @@
 {% block head %}
   {{ super() }}
 <style>
+    .myfooter {
+        position:relative;
+    }
+      button {
+        border: 3px solid #ccc;
+    }
 </style>
 {% endblock %}
 
@@ -12,14 +18,17 @@
         <form action="", method="post">
             {% for question in questions %}
             <div class = "question-body">
-                <h1 class="question">{{question.questionbody}}</h1>
-                <div class = "answers">
+                <h4 class="question">{{question.questionbody}}</h4>
+                <div class = "answers" style="display:flex;flex-direction:column;">
                     {%for answer in question.answers%}
                         <input type = "radio" name = "{{question.id}}" id = "{{answer.id}}" value = "{{answer.answerbody}}" required>
                         <label for="{{answer.id}}"> {{answer.answerbody}} </label>
                     {% endfor %}
                 </div>
             </div>
-            {% endfor %}      
+            {% endfor %} 
+              <button>
+        Think you've got it...? Take the quiz!</button>
+        </form>     
     </div>
 {% endblock %}
