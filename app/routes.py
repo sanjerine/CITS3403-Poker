@@ -55,7 +55,7 @@ def quiz():
 
     #questions = Question.query.filter_by(question.id = id) #HOW TO JUST GET ALL QUESTION maybe function in data base
     questions = Question.query.all()
-    
+    answer=Answer.query.all()
     
     result = 0
                             
@@ -64,19 +64,19 @@ def quiz():
         for question in questions:
             qid = str(question.id)
             qbody = request.form[qid]
-            if Answers.query.filter_by(answerbody = qbody).first().answerid:
+            if Answer.query.filter_by(answerbody = qbody).first().answerid:
                 result += 1
                             
         if not bool(Results.query.filter_by(userid = current_user.id).first()):
-            results = Results(userres = current_user)
+            results = Results(user = current_user)
             db.session.add(results)
             db.session.commit()
-        current_user.results.result = result
+        current_user.userresult[0].result = result
         db.session.commit()                   
                             
-        return redirect(url_for('index'))                 
+        return redirect(url_for('feedback'))                 
                             
-    return render_template('quiz.html', title = 'Quiz', questions = questions) 
+    return render_template('quiz.html', title = 'Quiz', questions = questions,answer=answer) 
 
 @app.route('/tutorial', methods = ['GET', 'POST'])
 @login_required
@@ -87,7 +87,7 @@ def tutorial():
             results=Results(userres=current_user)
             db.session.add(results)
             db.session.commit()
-        current_user.results.result = result
+        current_user.userresult.result = result
         db.session.commit()
 
         return redirect(url_for('index'))                 
@@ -99,30 +99,26 @@ def tutorial():
 @app.route('/feedback', methods = ['GET', 'POST'])
 @login_required
 def feedback():
-  if request.method == "POST":
-    feedbackrequest = request.form['feedback']
-    if not bool(Feedback.query.filter_by(user_id = current_user.id).first()):
-      feedback = Feedback(feedbackuser = current_user)
-      db.session.add(feedback)
-      db.session.commit()
+    if request.method == "POST":
+        feedbackrequest = request.form['feedback']
+        if not bool(Feedback.query.filter_by(user_id = current_user.id).first()):
+            feedback = Feedback(feedbackuser = current_user)
+            db.session.add(feedback)
+            db.session.commit()
                                    
-    current_user.feedback.filter_by(user_id = current_user.id).first().feedbackmsg = feedbackrequest  #note maked feedback data base feedback into feedbackmsg
-    db.session.commit()
+        current_user.feedback.filter_by(user_id = current_user.id).first().feedbackmsg = feedbackrequest  #note maked feedback data base feedback into feedbackmsg
+        db.session.commit()
+                      
+    cresult = ""
+    qsum = 10
+    percentage = ""                               
                                    
-                                                                                    
-                                                           
-                                   
-    result = ''
-    qsum = ''
-    percentage = ''                               
-                                   
-    if bool(Results.query.filter_by(userid = current_user.id).first()):
-        qsum = db.session.query(func.sum(Question.mark)).scalar()    #ummm dunno lol
-        result = current_user.results.result
-        percentage = int((result/qsum) *100)                           
+    if bool(Results.query.filter_by(userid = current_user.id).first()):    #ummm dunno lol
+        cresult = int(current_user.userresult[0].result)
+        percentage = int((cresult/qsum) *100)                           
                                         
                                   
-    return render_template('feedback.html', title = 'Feedback', result = result, sum = qsum, percentage = percentage) 
+    return render_template('feedback.html', title = 'Feedback', result = cresult, sum = qsum, percentage = percentage) 
 
 @app.route('/statistics')
 def stats(): 
@@ -156,6 +152,7 @@ def register():
 @app.route('/admin', methods = ['GET', 'POST'])
 @login_required
 def admin():
-    return render_template('admin/index.html', title = 'Admin')       
+    return render_template('admin/index.html', title = 'Admin')            
+                                 
     
                                 
