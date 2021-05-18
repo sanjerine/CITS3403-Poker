@@ -40,6 +40,12 @@ $ flask run
 
 ## Running the tests
 
+Python unit tests can be run using the following:
+```
+$ seleniumtesting.py
+```
+
+
 ## References
 
 ACBL - Resource Center. 2021. 52 Playing Cards. [online] Available at: <http://acbl.mybigcommerce.com/52-playing-cards/> [Accessed 18 May 2021]. (playing card images)
