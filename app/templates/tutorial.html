@@ -264,11 +264,11 @@
         </div>
         <div style="display:flex;flex-direction:column;justify-content:space-around;border-radius:15px;background-color:#B78FB7; width:550px; height: 400px; align-items:center">
             <div id="cards">
-                <img class="cardimg" src="/static/deck/red_joker.png">
-                <img class="cardimg" src="/static/deck/red_joker.png">
-                <img class="cardimg" src="/static/deck/red_joker.png">
-                <img class="cardimg" src="/static/deck/red_joker.png">
-                <img class="cardimg" src="/static/deck/red_joker.png">    
+                <img class="cardimg" alt="playing_card" src="/static/deck/red_joker.png">
+                <img class="cardimg" alt="playing_card" src="/static/deck/red_joker.png">
+                <img class="cardimg" alt="playing_card" src="/static/deck/red_joker.png">
+                <img class="cardimg" alt="playing_card" src="/static/deck/red_joker.png">
+                <img class="cardimg" alt="playing_card" src="/static/deck/red_joker.png">    
             </div>
             <div id = "gametext">
                 <input id="inp" style="width:350px;" placeholder="What hand could this be...?">
@@ -322,10 +322,10 @@
         "Clocking in at number 9 is the Pair. It's made up of... you can probably guess.",
         "And at number 10 - our lowest hand - the High Card!",
         "It's not really a hand per se. When you can't make any of the other hands, your highest card plays.",
-        "Alright, let's put it all together! See how many you can get right in a minute - and check your score on our scoreboard later!",
+        "Alright, let's put it all together! Let's see if you can get 10 right this time - and check your score on our scoreboard later!",
         "Congrats, you did it! Yay!"
         ]; 
-        var line = 32;
+        var line = 1;
         var current_ceiling = 2;  
         function continueGame() {
             document.getElementById("lineprogress").setAttribute("value", line)
